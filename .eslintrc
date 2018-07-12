@@ -1,7 +1,12 @@
 {
+  "plugins": ["jest"],
   "env": {
-    "node": true
+    "node": true,
+    "jest/globals": true
   },
 
-  "extends": ["callstack-io"]
+  "extends": ["callstack-io"],
+  "rules": {
+    "global-require": "off"
+  } 
 }
