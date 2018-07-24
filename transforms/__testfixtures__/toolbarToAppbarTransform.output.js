@@ -3,6 +3,12 @@
 import * as React from 'react';
 import { View, Platform, StyleSheet } from 'react-native';
 import { Appbar, Colors, Switch, Paragraph, withTheme } from 'react-native-paper';
+import type { Theme } from 'react-native-paper/types';
+
+type Props = {
+  navigation: any,
+  theme: Theme,
+};
 
 const initialParams = {
   showLeftIcon: true,
@@ -13,7 +19,7 @@ const initialParams = {
 
 const MORE_ICON = Platform.OS === 'ios' ? 'more-horiz' : 'more-vert';
 
-class ToolbarExample extends React.Component {
+class ToolbarExample extends React.Component<Props> {
   static title = 'Toolbar';
   static navigationOptions = ({ navigation }) => {
     const params = { ...initialParams, ...navigation.state.params };

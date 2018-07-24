@@ -1,6 +1,7 @@
 const fs = require('fs');
 const p = require('path');
 const jscodeshift = require('jscodeshift');
+const flowParser = require('flow-parser');
 
 const read = fileName =>
   fs.readFileSync(
@@ -23,7 +24,7 @@ module.exports = (transformName, testFileName) => {
     transform = transform.default;
   }
 
-  const ast = jscodeshift(source);
+  const ast = jscodeshift(source, { parser: flowParser });
   const transformedAst = transform(ast, jscodeshift);
 
   return {
