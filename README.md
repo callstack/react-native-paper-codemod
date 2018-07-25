@@ -5,6 +5,10 @@
 [![PRs Welcome][prs-welcome-badge]][prs-welcome]
 [![Chat][chat-badge]][chat]
 
+## Contributing
+
+Read the [contribution guidelines](/CONTRIBUTING.md) before contributing.
+
 <!-- badges -->
 [build-badge]: https://img.shields.io/circleci/project/github/callstack/react-native-paper-codemod/master.svg?style=flat-square
 [build]: https://circleci.com/gh/callstack/react-native-paper-codemod
