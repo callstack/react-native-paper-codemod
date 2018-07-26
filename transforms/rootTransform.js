@@ -1,4 +1,5 @@
 const toolbarToAppbarTransform = require('./toolbarToAppbarTransform');
+const dialogTranform = require('./dialogTransform');
 
 const cardTransform = require('./cardTransform');
 
@@ -8,6 +9,7 @@ module.exports = function(file, api, options) {
 
   let ast = j(file.source);
   ast = toolbarToAppbarTransform(ast, j);
+  ast = dialogTranform(ast, j);
 
   ast = cardTransform(ast, j);
 
