@@ -2,12 +2,16 @@ const toolbarToAppbarTransform = require('./toolbarToAppbarTransform');
 const dialogTranform = require('./dialogTransform');
 const drawerTransform = require('./drawerTransform');
 const cardTransform = require('./cardTransform');
+const listTransform = require('./listTransform');
+const paperTransform = require('./paperTransform');
 
 const transforms = [
   toolbarToAppbarTransform,
   dialogTranform,
   drawerTransform,
   cardTransform,
+  listTransform,
+  paperTransform,
 ];
 
 // eslint-disable-next-line
