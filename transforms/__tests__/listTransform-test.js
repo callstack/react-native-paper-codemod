@@ -9,3 +9,8 @@ test('list transform test 2', () => {
   const { expected, actual } = testHelper('listTransform', 'listTransform2');
   expect(expected).toEqual(actual);
 });
+
+test('list transform test 3', () => {
+  const { expected, actual } = testHelper('listTransform', 'listTransform3');
+  expect(expected).toEqual(actual);
+});
