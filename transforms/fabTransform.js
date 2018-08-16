@@ -31,7 +31,7 @@ module.exports = function transform(ast, j) {
   }
 
   if (fabImportsFiltered.length === 0) {
-    const newImport = j.importSpecifier(j.identifier('RadioButton'));
+    const newImport = j.importSpecifier(j.identifier('FAB'));
     imported.at(0).insertBefore(newImport);
   }
 
@@ -60,6 +60,44 @@ module.exports = function transform(ast, j) {
     openingTags.replaceWith(nodePath => {
       const { node } = nodePath;
       node.name.name = newName;
+      const fabNode = nodePath.parent;
+      const parent = nodePath.parent.parent;
+      if (parent.value.type === 'ReturnStatement') {
+        const portal = j.jsxElement(
+          j.jsxOpeningElement(j.jsxIdentifier('Portal'), [], false),
+          j.jsxClosingElement(j.jsxIdentifier('Portal'))
+        );
+        const paddedChildren = [
+          j.jsxText('\n'),
+          fabNode.value,
+          j.jsxText('\n'),
+        ];
+        portal.children = paddedChildren;
+        parent.value.argument = portal;
+      } else {
+        const portal = j.jsxElement(
+          j.jsxOpeningElement(j.jsxIdentifier('Portal'), [], false),
+          j.jsxClosingElement(j.jsxIdentifier('Portal'))
+        );
+        const paddedChildren = [
+          j.jsxText('\n'),
+          fabNode.value,
+          j.jsxText('\n'),
+        ];
+        portal.children = paddedChildren;
+        parent.value.children.push(portal, j.jsxText('\n'));
+        const filteredElementsToRemove = parent.value.children.filter(
+          child =>
+            child.openingElement &&
+            child.openingElement.name &&
+            child.openingElement.name.name !== 'FAB.Group'
+        );
+        const formatted = [];
+        filteredElementsToRemove.forEach(element => {
+          formatted.push(j.jsxText('\n'), element);
+        });
+        parent.value.children = [...formatted];
+      }
       return node;
     });
 

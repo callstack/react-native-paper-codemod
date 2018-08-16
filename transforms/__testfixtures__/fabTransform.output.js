@@ -55,8 +55,7 @@ class ButtonExample extends React.Component<Props, State> {
                 }
               }}
             />
-          </Portal>
-        </View>
+          </Portal></View>
       </View>
     );
   }
