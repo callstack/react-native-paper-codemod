@@ -28,6 +28,17 @@ module.exports = function transform(ast, j) {
     oldNames.includes(nodePath.node.imported.name)
   );
 
+  const dialogImport = imported.filter(
+    nodePath => nodePath.node.imported.name === 'Dialog'
+  );
+
+  if (filtered.length > 0 && dialogImport.length === 0) {
+    const newImport = j.importSpecifier(j.identifier('Dialog'));
+    imported.at(0).insertBefore(newImport);
+  } else if (filtered.length === 0) {
+    return ast;
+  }
+
   filtered.remove();
 
   allNames.forEach(({ oldName, newName }) => {

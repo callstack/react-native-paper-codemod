@@ -22,6 +22,17 @@ module.exports = function transform(ast, j) {
     oldNames.includes(nodePath.node.imported.name)
   );
 
+  const cardImport = imported.filter(
+    nodePath => nodePath.node.imported.name === 'Card'
+  );
+
+  if (filtered.length > 0 && cardImport.length === 0) {
+    const newImport = j.importSpecifier(j.identifier('Card'));
+    imported.at(0).insertBefore(newImport);
+  } else if (filtered.length === 0) {
+    return ast;
+  }
+
   filtered.remove();
 
   allNames.forEach(({ oldName, newName }) => {
