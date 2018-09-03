@@ -22,11 +22,39 @@
 
 ### `material-next`
 
-Migrate codebase using react-native-paper v1.0 to v2.0. The full list of things that changed can be found [here](https://github.com/callstack/react-native-paper/wiki/Migration-guide-for-2.0).
+Migrate codebase using react-native-paper v1.0 to v2.0. The full list of breaking changes can be found [here](https://github.com/callstack/react-native-paper/wiki/Migration-guide-for-2.0).
 
 ```sh
 jscodeshift -t react-native-paper-codemod/transforms/material-next.js <path>
 ```
+
+#### `material-next` script supports following transforms:
+
+#### It will rename imports and jsx tags:
+
+- `Toolbar` → `Appbar.Header`
+- `ToolbarBackAction` → `Appbar.BackAction`
+- `ToolbarContent` → `Appbar.Content`
+- `CardActions` → `Card.Actions`
+- `CardContent` → `Card.Content`
+- `CardCover` → `Card.Cover`
+- `DialogActions` → `Dialog.Actions`
+- `DialogContent` → `Dialog.Content`
+- `DialogScrollArea` → `Dialog.ScrollArea`
+- `DialogTitle` → `Dialog.Title`
+- `DrawerItem` → `Drawer.Item`
+- `DrawerSection` → `Drawer.Section`
+- `FABGroup` → `FAB.Group`
+- `ListAccordion` → `List.Accordion`
+- `ListItem` → `List.Item`
+- `ListSection` → `List.Section`
+- `RadioButtonGroup` → `RadioButton.Group`
+- `Paper` → `Surface`
+- `SearchBar` → `Searchbar`
+
+It will wrap in Portal components that are no longer wrapped in Portal by default.
+
+It will remove color prop from DrawerItem component and set the proper color via theme prop.
 
 ## Contributing
 
