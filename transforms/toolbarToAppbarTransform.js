@@ -30,9 +30,10 @@ module.exports = function transform(ast, j) {
 
   if (filtered.length > 0) {
     const newImport = j.importSpecifier(j.identifier('Appbar'));
-    filtered.remove();
     imported.at(0).insertBefore(newImport);
   }
+
+  filtered.remove();
 
   allNames.forEach(({ oldName, newName }) => {
     const openingTags = ast.find(j.JSXOpeningElement, {

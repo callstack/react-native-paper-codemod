@@ -1,8 +1,9 @@
-const oldNames = ['ListItem', 'ListAccordion'];
+const oldNames = ['ListItem', 'ListAccordion', 'ListSection'];
 
 const allNames = [
-  { oldName: 'ListItem', newName: 'ListSection.Item' },
-  { oldName: 'ListAccordion', newName: 'ListSection.Accordion' },
+  { oldName: 'ListItem', newName: 'List.Item' },
+  { oldName: 'ListAccordion', newName: 'List.Accordion' },
+  { oldName: 'ListSection', newName: 'List.Section' },
 ];
 
 module.exports = function transform(ast, j) {
@@ -21,18 +22,12 @@ module.exports = function transform(ast, j) {
     oldNames.includes(nodePath.node.imported.name)
   );
 
-  const listSectionImportsFiltered = imported.filter(
-    nodePath => nodePath.node.imported.name === 'ListSection'
-  );
-
   if (filtered.length === 0) {
     return ast;
   }
 
-  if (listSectionImportsFiltered.length === 0) {
-    const newImport = j.importSpecifier(j.identifier('ListSection'));
-    imported.at(0).insertBefore(newImport);
-  }
+  const newImport = j.importSpecifier(j.identifier('List'));
+  imported.at(0).insertBefore(newImport);
 
   filtered.remove();
 
